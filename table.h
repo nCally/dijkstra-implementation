@@ -18,7 +18,6 @@ struct Table{
 
     void createAndPush(Edge edge, currentNodeType index){
         entryPair newPair {make_pair(edge.distance, index.first)};
-        cout << edge.destination << endl;
         table[edge.destination] = newPair; // this registers a new destination in the table.
     };
 
@@ -27,10 +26,9 @@ struct Table{
     2. Add the current node number to the number on the edge, then compare which distance is smaller. If the new distance is smaller, replace what is already on the vector for that node, else just leave the previous distance and don't do any thing there. */
     void push(Edge edge, currentNodeType currentNode, vector<string>& visited){
         // will do a check of which is larger or not before adding to the map list
-
         if(find(visited.begin(), visited.end(), edge.destination) == visited.end()){
             // the above condition means that the node has not been visited
-
+            
             double sumDistance { currentNode.second + edge.distance }; // the edge's distance plus the current nodes distance. this is done so we can compare and know which is lesser.
 
             // since the node already exists in the table..., get the pair registered to the node and compare
@@ -46,9 +44,6 @@ struct Table{
 
     currentNodeType lowestUnvisited(vector<string>& visited){
         //
-        for(string dd: visited){
-            cout << "yu " << dd << " what happened" << endl;
-        }
 
         map<string, entryPair> unvisitedFromTable {};
         map<string, entryPair>::iterator table_it = table.begin();
@@ -68,14 +63,13 @@ struct Table{
         while(unvisited_it != unvisitedFromTable.end()){
             if(unvisited_it ->second.first < smallest.first){
                 
-                smallest = make_pair(unvisited_it ->second.first, unvisited_it ->second.second);
+                smallest = make_pair(unvisited_it ->second.first, unvisited_it ->first);
             }
             unvisited_it++;
         }
 
-        cout << "Node to be returned " << smallest.first << ", " << smallest.second << endl;
-
         return make_pair(smallest.second, smallest.first);
+
     };
 };
 
