@@ -20,7 +20,7 @@ string dijkstra(Graph& graph, string startNode){
     //NO. 2. table pair - would keep details of values from visited nodes
     Table board {};
 
-    vector<int> ddd {};
+    int indexNode {0}; // This is where to start in iterating the nodes on the graph.
 
      // The current node should be a pair of string - for node name and the number is carries
     currentNodeType currentNode { make_pair(startNode, 0) };// At first current node is equal to the start node... subsequently, as the for loop ends current node is changed.
@@ -48,7 +48,6 @@ string dijkstra(Graph& graph, string startNode){
                 // The end;
                 // add node to visited
                 visited.push_back(it -> first);
-                cout << visited.size() << " size of visited" << endl;
 
             }
             
@@ -61,24 +60,17 @@ string dijkstra(Graph& graph, string startNode){
         // update the current node... with the lowest distance node in the board table.
         currentNode = board.lowestUnvisited(visited);
         
-        cout << currentNode.first << " should be outputed" << endl;
+        indexNode++;
 
-        ddd.push_back(2);
-
-    } while(ddd.size() < 10); 
+    } while(indexNode < graph.graph.size()); 
     
     // to see the nodes and details added to the board table
-    /* map<string, entryPair>::iterator board_it = board.table.begin();
+    map<string, entryPair>::iterator board_it = board.table.begin();
     while(board_it != board.table.end()){
-        cout << board_it -> first << " - " << endl;
+        cout << board_it -> first << ": " << board_it ->second.first << " from " << board_it ->second.second << endl;
         
         board_it++;
-    } */
-
-
-
-
-
+    }
 
 
     // get the initial node
@@ -88,7 +80,6 @@ string dijkstra(Graph& graph, string startNode){
     for(Edge node: nodeEdges){
         cout << node.distance << " to " << node.destination << endl;
     } */
-
 
     return "";
 };
