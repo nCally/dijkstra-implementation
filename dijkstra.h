@@ -63,11 +63,14 @@ string dijkstra(Graph& graph, string startNode){
         indexNode++;
 
     } while(indexNode < graph.graph.size()); 
+
+    // make the start node 0
+    board.table[startNode] = make_pair(0, startNode);
     
     // to see the nodes and details added to the board table
     map<string, entryPair>::iterator board_it = board.table.begin();
     while(board_it != board.table.end()){
-        cout << board_it -> first << ": " << board_it ->second.first << " from " << board_it ->second.second << endl;
+        cout << board_it -> first << ": " << board_it ->second.first << " from (" << board_it ->second.second << ")" << endl;
         
         board_it++;
     }
